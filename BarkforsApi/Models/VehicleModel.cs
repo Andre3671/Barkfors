@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Frontend.Models
+namespace BarkforsApi.Models
 {
     public class VehicleModel
     {
@@ -14,6 +15,7 @@ namespace Frontend.Models
         public Brands Brand { get; set; }
         public VehicleColorOptions Color { get; set; }
         public TypesOfFuel FuelType { get; set; }
+        [NotMapped]
         public List<VehicleEquipment> SelectedVehicleEquipment { get; set; }
 
         public VehicleModel()

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontend"
+        xmlns:vm="clr-namespace:Frontend.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -21,9 +22,9 @@
                 <Label>Sök:</Label>
                 <TextBox x:Name="TextBoxSearch" TextChanged="TextBox_TextChanged"></TextBox>
             </StackPanel>
-            <ListView Grid.Row="1"  x:Name="MainListView"  SelectionChanged="MainListView_SelectionChanged">
+            <ListView Grid.Row="1"  x:Name="MainListView" ItemsSource="{Binding Vm.GetVehicles}"  SelectionChanged="MainListView_SelectionChanged">
                 <ListView.ItemTemplate >
-                    <DataTemplate >
+                    <DataTemplate  DataType="classes:VehicleModel">
                         <Grid>
                             <TextBlock Text="{Binding VIN}" Margin="5,0,0,0" />
                         </Grid>

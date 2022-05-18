@@ -22,14 +22,17 @@ namespace Frontend
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainViewModel vm;
+       public MainViewModel Vm { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            vm = new MainViewModel();
-            MainListView.ItemsSource = vm.Vehicles;
+            Vm = new MainViewModel();
+            MainListView.ItemsSource = Vm.Vehicles;
+            //Task.Run(() => Vm.EditVehicle());
         }
+
+
 
         private void MainListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -43,7 +46,7 @@ namespace Frontend
         {
             if(TextBoxSearch.Text.Length >= 1) { 
             List<VehicleModel> TempList = new List<VehicleModel>(); ;
-            foreach (VehicleModel v in vm.Vehicles)
+            foreach (VehicleModel v in Vm.Vehicles)
             {
                 if (v.VIN.ToLower().Contains(TextBoxSearch.Text.ToLower()))
                 {
