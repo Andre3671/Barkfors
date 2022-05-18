@@ -1,0 +1,58 @@
+﻿<Window x:Class="Frontend.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Frontend"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1.3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label>Sök:</Label>
+                <TextBox x:Name="TextBoxSearch" TextChanged="TextBox_TextChanged"></TextBox>
+            </StackPanel>
+            <ListView Grid.Row="1"  x:Name="MainListView"  SelectionChanged="MainListView_SelectionChanged">
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+                        <Grid>
+                            <TextBlock Text="{Binding VIN}" Margin="5,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Grid.Row="2">
+                <Button> Ta bort</Button>
+                <Button> Lägg till</Button>
+                <Button> Ändra</Button>
+            </StackPanel>
+        </Grid>
+       
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Label>Model:</Label>
+                <TextBlock x:Name="TextBlockModel"></TextBlock>
+                <Label>Vin:</Label>
+                <TextBlock x:Name="TextBlockVin"></TextBlock>
+                <Label>Regnummer:</Label>
+                <TextBlock x:Name="TextBlockReg"></TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
