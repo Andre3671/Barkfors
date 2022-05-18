@@ -25,7 +25,7 @@ namespace Frontend
        public MainViewModel Vm { get; set; }
 
         public MainWindow()
-        {
+        { 
             InitializeComponent();
             Vm = new MainViewModel();
             MainListView.ItemsSource = Vm.Vehicles;
