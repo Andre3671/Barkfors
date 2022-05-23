@@ -16,7 +16,7 @@ namespace BarkforsApi.Models
         public VehicleColorOptions Color { get; set; }
         public TypesOfFuel FuelType { get; set; }
         [NotMapped]
-        public List<VehicleEquipment> SelectedVehicleEquipment { get; set; }
+        public VehicleEquipment SelectedVehicleEquipment { get; set; }
 
         public VehicleModel()
         {

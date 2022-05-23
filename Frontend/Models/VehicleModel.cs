@@ -14,7 +14,7 @@ namespace Frontend.Models
         public Brands Brand { get; set; }
         public VehicleColorOptions Color { get; set; }
         public TypesOfFuel FuelType { get; set; }
-        public List<VehicleEquipment> SelectedVehicleEquipment { get; set; }
+        public VehicleEquipment SelectedVehicleEquipment { get; set; }
 
         public VehicleModel()
         {

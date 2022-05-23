@@ -37,9 +37,23 @@ namespace Frontend
         private void MainListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             VehicleModel SelectedVehicle = (VehicleModel)MainListView.SelectedItem;
-            TextBlockModel.Text = SelectedVehicle.ModelName;
-            TextBlockVin.Text = SelectedVehicle.VIN;
-            TextBlockReg.Text = SelectedVehicle.LicensePlateNumber;
+            if(SelectedVehicle != null)
+            {
+                TextBlockModel.Text = SelectedVehicle.ModelName;
+                TextBlockVin.Text = SelectedVehicle.VIN;
+                TextBlockReg.Text = SelectedVehicle.LicensePlateNumber;
+                TextBlockReg_Copy.Text = SelectedVehicle.LicensePlateNumber;
+                TextBlockReg_Copy1.Text = SelectedVehicle.Color.ToString();
+                TextBlockReg_Copy2.Text = SelectedVehicle.Brand.ToString();
+                TextBlockReg_Copy3.Text = SelectedVehicle.FuelType.ToString();
+                string EquipmentList = "";
+                foreach(VehicleEquipments equip in SelectedVehicle.SelectedVehicleEquipment.VehicleEquipmentList)
+                {
+                    EquipmentList += "," + equip.ToString();
+                }
+                TextBlockReg_Copy4.Text = EquipmentList;
+            }
+            
         }
         
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -55,6 +69,16 @@ namespace Frontend
             }
             MainListView.ItemsSource = TempList;
             }                
+        }
+
+        private void radioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

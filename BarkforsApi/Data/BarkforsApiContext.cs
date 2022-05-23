@@ -15,5 +15,6 @@ namespace BarkforsApi.Data
         }
 
         public DbSet<BarkforsApi.Models.VehicleModel> VehicleModel { get; set; }
+        public DbSet<BarkforsApi.Models.VehicleEquipment> VehicleEquipment { get; set; }
     }
 }

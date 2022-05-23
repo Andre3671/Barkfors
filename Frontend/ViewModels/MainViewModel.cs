@@ -92,7 +92,7 @@ namespace Frontend.ViewModels
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles");
+                    var jsonResult = await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles/Remove");
 
                     vehicles = JsonConvert.DeserializeObject<ObservableCollection<VehicleModel>>(jsonResult);
 

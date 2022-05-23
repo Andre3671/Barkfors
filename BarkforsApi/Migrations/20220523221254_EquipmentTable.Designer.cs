@@ -3,14 +3,16 @@ using BarkforsApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BarkforsApi.Migrations
 {
     [DbContext(typeof(BarkforsApiContext))]
-    partial class BarkforsApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220523221254_EquipmentTable")]
+    partial class EquipmentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
