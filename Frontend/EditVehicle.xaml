@@ -1,0 +1,40 @@
+﻿<Window x:Class="Frontend.EditVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Frontend"
+        xmlns:vm="clr-namespace:Frontend.ViewModels"
+        mc:Ignorable="d"
+        Title="EditVehicle" Height="450" Width="600">
+    <Grid Margin="0,0,3,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="label" Content="Ändra fordon" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+        <StackPanel HorizontalAlignment="Center" Width="300" Grid.Row="1" Margin="0,0,0,3">
+            <Label>Modell:</Label>
+            <TextBox x:Name="ModelTextBox"></TextBox>
+            <Label>Regnummer:</Label>
+            <TextBox x:Name="RegTextBox"></TextBox>
+            <Label>Vin:</Label>
+            <TextBox x:Name="VinTextBox"></TextBox>
+            <Label>Färg:</Label>
+            <ComboBox x:Name="ColorTextBox" SelectionChanged="ColorTextBox_SelectionChanged"></ComboBox>
+            <Label>Märke:</Label>
+            <ComboBox x:Name="BrandTextBox" SelectionChanged="BrandTextBox_SelectionChanged"></ComboBox>
+            <Label>Bränsle:</Label>
+            <ComboBox x:Name="FuelTextBox" SelectionChanged="FuelTextBox_SelectionChanged"></ComboBox>
+            <Label>Utrustning:</Label>
+            <TextBox x:Name="EquipmentTextbox"></TextBox>
+            <StackPanel  Orientation="Horizontal">
+                <Button  Width="150" Click="Button_Click">Avbryt</Button>
+                <Button Width="150" Click="Button_Click_1">Spara</Button>
+            </StackPanel>
+        </StackPanel>
+        
+
+
+    </Grid>
+</Window>

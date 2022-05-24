@@ -1,0 +1,48 @@
+﻿<Window x:Class="Frontend.AddVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Frontend"
+        xmlns:vm="clr-namespace:Frontend.ViewModels"
+        mc:Ignorable="d"
+        Title="AddVehicle" Height="450" Width="600">
+    <Grid Margin="0,0,3,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="label" Content="Lägg till fordon" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+        <StackPanel HorizontalAlignment="Center" Width="350" Grid.Row="1" Margin="0,0,0,3">
+            <Label>Modell:</Label>
+            <TextBox x:Name="ModelTextBox"></TextBox>
+            <Label>Regnummer:</Label>
+            <TextBox x:Name="RegTextBox"></TextBox>
+            <Label>Vin:</Label>
+            <TextBox x:Name="VinTextBox"></TextBox>
+            <Label>Färg:</Label>
+            <ComboBox x:Name="ColorTextBox" SelectionChanged="ColorTextBox_SelectionChanged"></ComboBox>
+            <Label>Märke:</Label>
+            <ComboBox x:Name="BrandTextBox" SelectionChanged="BrandTextBox_SelectionChanged"></ComboBox>
+            <Label>Bränsle:</Label>
+            <ComboBox x:Name="FuelTextBox" SelectionChanged="FuelTextBox_SelectionChanged"></ComboBox>
+            <Label>Utrustning:</Label>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <CheckBox x:Name="SunroofCheck">Sunroof</CheckBox>
+                <CheckBox x:Name="AutoPilotCheck">AutoPilot</CheckBox>
+                <CheckBox x:Name="SportseatsCheck">Sportseats</CheckBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <CheckBox x:Name="KeylessCheck">Keyless</CheckBox>
+                <CheckBox x:Name="AndroidAutoCheck">AndroidAuto</CheckBox>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Button  Width="150" Click="Button_Click">Avbryt</Button>
+                <Button Width="150" Click="Button_Click_1">Spara</Button>
+            </StackPanel>
+        </StackPanel>
+        
+
+
+    </Grid>
+</Window>

@@ -35,7 +35,7 @@ namespace BarkforsApi.Controllers
             return Ok(list);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("~/api/Vehicles/Remove/{id}")]
         public async Task<IActionResult> RemoveVehicle(int id)
         {
@@ -44,7 +44,30 @@ namespace BarkforsApi.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("~/api/Vehicles/Edit/{id}/{vin}/{plate}/{model}/{brand}/{color}/{fueltype}/{Equipment}")]
+        public async Task<IActionResult> EditVehicle(int id,string vin, string plate, string model, Brands brand, VehicleColorOptions color, TypesOfFuel fueltype, string Equipment)
+        {
+           VehicleModel vehicle = _context.VehicleModel.Where(v => v.Id == id).FirstOrDefault();
+            if (vehicle != null)
+            {
+                vehicle.LicensePlateNumber = plate;
+                vehicle.Brand = brand;
+                vehicle.VIN = vin;
+                vehicle.FuelType = fueltype;
+                vehicle.Color = color;
+                vehicle.ModelName = model;
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+           
+        }
+
+        [HttpGet]
         [Route("~/api/Vehicles/Add/{vin}/{plate}/{model}/{brand}/{color}/{fueltype}/{Equipment}")]
         public async Task<IActionResult> AddVehicle(string vin,string plate, string model,Brands brand, VehicleColorOptions color, TypesOfFuel fueltype,string Equipment )
         {
@@ -57,26 +80,24 @@ namespace BarkforsApi.Controllers
                 ModelName = model,
                 FuelType = fueltype,
             };
-
-            List<string> EquipmentListString = Equipment.Split(",").ToList();
-            List<VehicleEquipments> equipments = new List<VehicleEquipments>();
-            foreach(string equipment in EquipmentListString)
-            {
-                foreach (int i in Enum.GetValues(typeof(VehicleEquipments)))
-                {
-                    if( equipment == Enum.GetName(typeof(VehicleEquipments), i))
-                    {
-                        VehicleEquipments equip = (VehicleEquipments)Enum.Parse(typeof(VehicleEquipments), equipment);
-                        equipments.Add(equip);
-                    }
-                    
-                }
-            }
             VehicleEquipment vehicleEquipment = new VehicleEquipment();
-            vehicleEquipment.VehicleEquipmentList = equipments;
-            vehicle.SelectedVehicleEquipment = vehicleEquipment;
+            if (Equipment != null)
+            {
+                vehicleEquipment.VehicleEquipmentString = Equipment;
+            }
+
             _context.VehicleModel.Add(vehicle);
             _context.SaveChanges();
+            int vehId = _context.VehicleModel.Where(x => x.VIN == vehicle.VIN).FirstOrDefault().Id;
+           
+            
+                vehicleEquipment.VehicleId = vehId;
+                _context.VehicleEquipment.Add(vehicleEquipment);
+                _context.SaveChanges();
+            
+            
+            
+           
             return Ok();
         }
 

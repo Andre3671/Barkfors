@@ -52,21 +52,32 @@ namespace Frontend.ViewModels
 
         }
 
-        public  async Task EditVehicle()
+        public async void EditVehicle(VehicleModel vehicle)
         {
+            string equipment = " ";
+            if(vehicle.SelectedVehicleEquipment.VehicleEquipmentList.Count != 0)
+            {
+                
+                    foreach (int i in Enum.GetValues(typeof(VehicleEquipments)))
+                    {
+                    equipment += "," + Enum.GetName(typeof(VehicleEquipments), i);
+
+                    }
+                
+            }
             try
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    ObservableCollection<VehicleModel> vehicles = new ObservableCollection<VehicleModel>();
+                    
 
                     httpClient.Timeout = new TimeSpan(0, 0, 5);
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles");
+                    await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles/Edit/" + vehicle.Id + "/" + vehicle.VIN + "/" + vehicle.LicensePlateNumber + "/" + vehicle.ModelName + "/" + vehicle.Brand + "/" + vehicle.Color + "/" + vehicle.FuelType + "/" + equipment + "/");
 
-                    vehicles = JsonConvert.DeserializeObject<ObservableCollection<VehicleModel>>(jsonResult);
+                    
 
                     httpClient.Dispose();
                     
@@ -80,7 +91,50 @@ namespace Frontend.ViewModels
             }
 
         }
-        public static async Task<ObservableCollection<VehicleModel>> RemoveVehicle()
+
+        public async void AddVehicle(VehicleModel vehicle)
+        {
+            string equipment = " ";
+            if (vehicle.SelectedVehicleEquipment.VehicleEquipmentList.Count != 0)
+            {
+
+                foreach (int i in vehicle.SelectedVehicleEquipment.VehicleEquipmentList)
+                {
+
+                    equipment += "," + Enum.GetName(typeof(VehicleEquipments), i);
+
+                }
+
+            }
+            try
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+
+
+                    httpClient.Timeout = new TimeSpan(0, 0, 5);
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles/Add/" + vehicle.VIN + "/" + vehicle.LicensePlateNumber + "/" + vehicle.ModelName + "/" + vehicle.Brand + "/" + vehicle.Color + "/" + vehicle.FuelType + "/" + equipment + "/");
+
+
+
+                    httpClient.Dispose();
+
+                }
+            }
+            catch (HttpRequestException hr)
+            {
+                Debug.WriteLine(hr.StackTrace);
+                Debug.WriteLine("Server isn´t responding");
+
+            }
+
+        }
+
+
+        public  async void RemoveVehicle(int id)
         {
             try
             {
@@ -92,19 +146,19 @@ namespace Frontend.ViewModels
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles/Remove");
+                    var jsonResult = await httpClient.GetStringAsync("https://localhost:44378/api/Vehicles/Remove/" + id);
 
-                    vehicles = JsonConvert.DeserializeObject<ObservableCollection<VehicleModel>>(jsonResult);
+                 
 
                     httpClient.Dispose();
-                    return vehicles;
+                   
                 }
             }
             catch (HttpRequestException hr)
             {
                 Debug.WriteLine(hr.StackTrace);
                 Debug.WriteLine("Server isn´t responding");
-                return null;
+                
 
             }
 

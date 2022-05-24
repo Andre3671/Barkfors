@@ -23,7 +23,7 @@ namespace Frontend
     public partial class MainWindow : Window
     {
        public MainViewModel Vm { get; set; }
-
+        List<VehicleModel> TempList = new List<VehicleModel>();
         public MainWindow()
         { 
             InitializeComponent();
@@ -58,8 +58,8 @@ namespace Frontend
         
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(TextBoxSearch.Text.Length >= 1) { 
-            List<VehicleModel> TempList = new List<VehicleModel>(); ;
+            if(TextBoxSearch.Text.Length >= 1) {
+                TempList = new List<VehicleModel>();
             foreach (VehicleModel v in Vm.Vehicles)
             {
                 if (v.VIN.ToLower().Contains(TextBoxSearch.Text.ToLower()))
@@ -68,17 +68,52 @@ namespace Frontend
                 }
             }
             MainListView.ItemsSource = TempList;
-            }                
+            }
+            else
+            {
+                MainListView.ItemsSource = Vm.Vehicles;
+            }              
         }
 
-        private void radioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            AddVehicle add = new AddVehicle();
+            add.Show();
+            add.Closed += Add_Closed;
+        }
 
+        private void Add_Closed(object sender, EventArgs e)
+        {
+            Vm = new MainViewModel();
+            MainListView.ItemsSource = Vm.Vehicles;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            VehicleModel SelectedVehicle = (VehicleModel)MainListView.SelectedItem;
+            Vm.RemoveVehicle(SelectedVehicle.Id);
+            TempList.Remove(SelectedVehicle);
+            MainListView.ItemsSource = TempList;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            VehicleModel SelectedVehicle = (VehicleModel)MainListView.SelectedItem;
+            if(SelectedVehicle != null)
+            {
+                EditVehicle edit = new EditVehicle(SelectedVehicle);
+                edit.ShowDialog();
+                edit.Closed += Edit_Closed;
+            }
+            
+        }
+
+        private void Edit_Closed(object sender, EventArgs e)
+        {
+            Vm = new MainViewModel();
+            MainListView.ItemsSource = Vm.Vehicles;
         }
     }
 }

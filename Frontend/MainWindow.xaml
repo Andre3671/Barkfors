@@ -33,9 +33,9 @@
                 </ListView.ItemTemplate>
             </ListView>
             <StackPanel Grid.Row="2">
-                <Button/>
+                <Button Click="Button_Click_1" >Ta bort</Button>
                 <Button Click="Button_Click"> Lägg till</Button>
-                <Button> Ändra</Button>
+                <Button Click="Button_Click_2"> Ändra</Button>
             </StackPanel>
         </Grid>
        
